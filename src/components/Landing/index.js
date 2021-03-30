@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState, Fragment } from "react";
+import { Link } from "react-router-dom";
 
 const Landing = () => {
   const griffeW = useRef(null);
@@ -12,13 +13,39 @@ const Landing = () => {
     }, 1000);
   }, []);
 
+  const imageDroite = () => {
+    griffeW.current.classList.add("leftImg");
+  };
+
+  const imageGauche = () => {
+    griffeW.current.classList.add("rightImg");
+  };
+
+  const clearImage = () => {
+    if (griffeW.current.classList.contains("leftImg"))
+      griffeW.current.classList.remove("leftImg");
+    else if (griffeW.current.classList.contains("rightImg"))
+      griffeW.current.classList.remove("rightImg");
+  };
   const anim1 = btnA && (
     <Fragment>
-      <div className="leftBox">
-        <button className="btn-welcome">Inscription</button>
+      <div
+        onMouseOver={imageDroite}
+        onMouseOut={clearImage}
+        className="leftBox"
+      >
+        <Link className="btn-welcome" to="/signup">
+          Inscription
+        </Link>
       </div>
-      <div className="rightBox">
-        <button className="btn-welcome">Connexion</button>
+      <div
+        onMouseOver={imageGauche}
+        onMouseOut={clearImage}
+        className="rightBox"
+      >
+        <Link className="btn-welcome" to="/login">
+          Connexion
+        </Link>
       </div>
     </Fragment>
   );
