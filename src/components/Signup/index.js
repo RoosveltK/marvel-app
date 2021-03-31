@@ -1,7 +1,8 @@
 import React, { useState, useContext } from "react";
 import { FirebaseContext } from "../Firebase";
+import { Link } from "react-router-dom";
 
-const Signup = () => {
+const Signup = (props) => {
   const datas = {
     pseudo: "",
     email: "",
@@ -22,7 +23,10 @@ const Signup = () => {
     const { email, password } = data;
     firebase
       .signUp(email, password)
-      .then((user) => setData({ ...datas }))
+      .then((user) => {
+        setData({ ...datas });
+        props.history.push("/welcome");
+      })
       .catch((err) => {
         setError(err);
         setData({ ...datas });
@@ -98,6 +102,12 @@ const Signup = () => {
               </div>
               {submitBtn}
             </form>
+            <div className="linkContainer">
+              Déja inscrit ?
+              <Link className="simpleLink" to="/login">
+                Connectez-vous
+              </Link>
+            </div>
           </div>
         </div>
       </div>
