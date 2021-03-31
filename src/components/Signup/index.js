@@ -23,7 +23,13 @@ const Signup = (props) => {
     const { email, password } = data;
     firebase
       .signUp(email, password)
-      .then((user) => {
+      .then((userAuth) => {
+        return firebase.user(userAuth.user.uid).set({
+          pseudo,
+          email,
+        });
+      })
+      .then(() => {
         setData({ ...datas });
         props.history.push("/welcome");
       })

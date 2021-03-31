@@ -8,6 +8,7 @@ import Landing from "../Landing";
 import Login from "../Login";
 import Signup from "../Signup";
 import Welcome from "../Welcome";
+import ForgetPassword from "../ForgetPassword";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/welcome" component={Welcome} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+        <Route path="/forgetpassword" component={ForgetPassword} />
         <Route component={ErrorPage} />
       </Switch>
 
