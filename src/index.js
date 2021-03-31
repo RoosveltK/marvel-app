@@ -5,9 +5,9 @@ import Firebase, { FirebaseContext } from "./components/Firebase";
 // import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
-  <FirebaseContext.Profider value={new Firebase()}>
+  <FirebaseContext.Provider value={new Firebase()}>
     <App />
-  </FirebaseContext.Profider>,
+  </FirebaseContext.Provider>,
   document.getElementById("root")
 );
 
