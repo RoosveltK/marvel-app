@@ -103,9 +103,8 @@ const Signup = (props) => {
               {submitBtn}
             </form>
             <div className="linkContainer">
-              Déja inscrit ?
               <Link className="simpleLink" to="/login">
-                Connectez-vous
+                Déja inscrit ? Connectez-vous
               </Link>
             </div>
           </div>
