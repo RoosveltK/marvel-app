@@ -12,7 +12,6 @@ const Welcome = (props) => {
     const sess = firebase.auth.onAuthStateChanged((user) => {
       user ? setUserSession(user) : props.history.push("/login");
     });
-
     if (userSession !== null) {
       firebase
         .user(userSession.uid)
@@ -25,11 +24,10 @@ const Welcome = (props) => {
         })
         .catch((err) => console.log(err));
     }
-
     return () => {
       sess();
     };
-  }, []);
+  }, [userSession]);
 
   return userSession === null ? (
     <Fragment>
