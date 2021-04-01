@@ -141,8 +141,8 @@ class Quiz extends Component {
         </p>
       );
     });
-    return this.state.quizPartEnd ? (
-      <QuizOver />
+    return !this.state.quizPartEnd ? (
+      <QuizOver ref={this.completQuiz} />
     ) : (
       <div>
         <Levels />
