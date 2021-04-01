@@ -14,11 +14,15 @@ class Quiz extends Component {
     idQuestion: 0,
     btnActive: true,
     userResponse: null,
+    score: 0,
   };
+
+  completQuiz = React.createRef();
 
   loadQuestion = (quizz) => {
     const datas = QuizMarvel[0].quizz[quizz];
     if (datas.length >= this.state.maxQuestion) {
+      this.completQuiz.current = datas;
       const removeAnswer = datas.map(({ answer, ...Reste }) => Reste);
       this.setState({
         saveQuestion: removeAnswer,
@@ -38,6 +42,14 @@ class Quiz extends Component {
         options: this.state.saveQuestion[this.state.idQuestion].options,
       });
     }
+    if (this.state.idQuestion !== prevState.idQuestion) {
+      this.setState({
+        question: this.state.saveQuestion[this.state.idQuestion].question,
+        options: this.state.saveQuestion[this.state.idQuestion].options,
+        btnActive: true,
+        userResponse: null,
+      });
+    }
   }
   handleAnswer = (resp) => {
     this.setState({
@@ -46,6 +58,23 @@ class Quiz extends Component {
     });
   };
 
+  nextQuestion = () => {
+    if (this.state.idQuestion === this.state.maxQuestion - 1) {
+      //END
+    } else {
+      this.setState((prevState) => ({
+        idQuestion: prevState.idQuestion + 1,
+      }));
+    }
+    const correctQuestion = this.completQuiz.current[this.state.idQuestion]
+      .answer;
+    //Verif du score
+    if (this.state.userResponse === correctQuestion) {
+      this.setState((prevState) => ({
+        score: prevState.score + 1,
+      }));
+    }
+  };
   render() {
     const question = this.state.options.map((option, index) => {
       return (
@@ -66,7 +95,11 @@ class Quiz extends Component {
         <ProgressBar />
         <h2>{this.state.question}</h2>
         {question}
-        <button disabled={this.state.btnActive} className="btnSubmit">
+        <button
+          disabled={this.state.btnActive}
+          onClick={this.nextQuestion}
+          className="btnSubmit"
+        >
           Suivant
         </button>
       </div>
